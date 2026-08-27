@@ -111,3 +111,78 @@ export function csvEscapar(valor: unknown): string {
   const texto = valor === null || valor === undefined ? "" : String(valor);
   return `"${texto.replace(/"/g, '""')}"`;
 }
+
+/**
+ * Fuso da igreja. Datas com hora (eventos) são digitadas e exibidas neste
+ * fuso, independentemente de onde o servidor estiver rodando.
+ */
+export const FUSO_IGREJA = process.env.NEXT_PUBLIC_FUSO_IGREJA ?? "America/Sao_Paulo";
+
+function deslocamentoMinutos(data: Date, fuso: string): number {
+  const formatador = new Intl.DateTimeFormat("en-US", {
+    timeZone: fuso,
+    hour12: false,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
+  const partes = Object.fromEntries(
+    formatador.formatToParts(data).map((parte) => [parte.type, parte.value]),
+  );
+  const comoUtc = Date.UTC(
+    Number(partes.year),
+    Number(partes.month) - 1,
+    Number(partes.day),
+    Number(partes.hour) === 24 ? 0 : Number(partes.hour),
+    Number(partes.minute),
+    Number(partes.second),
+  );
+  return (comoUtc - data.getTime()) / 60000;
+}
+
+/** `2026-09-06T19:30` (input datetime-local) → instante ISO em UTC. */
+export function campoLocalParaIso(valor: string, fuso = FUSO_IGREJA): string {
+  const [data, hora = "00:00"] = valor.split("T");
+  const [ano, mes, dia] = data.split("-").map(Number);
+  const [h, m] = hora.split(":").map(Number);
+  const base = Date.UTC(ano, mes - 1, dia, h, m);
+  let instante = base - deslocamentoMinutos(new Date(base), fuso) * 60000;
+  instante = base - deslocamentoMinutos(new Date(instante), fuso) * 60000;
+  return new Date(instante).toISOString();
+}
+
+function partesNoFuso(iso: string, fuso = FUSO_IGREJA) {
+  const formatador = new Intl.DateTimeFormat("en-CA", {
+    timeZone: fuso,
+    hour12: false,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  return Object.fromEntries(
+    formatador.formatToParts(new Date(iso)).map((parte) => [parte.type, parte.value]),
+  ) as Record<string, string>;
+}
+
+/** Instante ISO → `2026-09-06T19:30` para preencher um datetime-local. */
+export function isoParaCampoLocal(iso: string, fuso = FUSO_IGREJA): string {
+  const p = partesNoFuso(iso, fuso);
+  return `${p.year}-${p.month}-${p.day}T${p.hour === "24" ? "00" : p.hour}:${p.minute}`;
+}
+
+/** Instante ISO → `2026-09-06` no fuso da igreja (usado no calendário). */
+export function chaveDataIso(iso: string, fuso = FUSO_IGREJA): string {
+  const p = partesNoFuso(iso, fuso);
+  return `${p.year}-${p.month}-${p.day}`;
+}
+
+/** Instante ISO → `19:30` no fuso da igreja. */
+export function horaIso(iso: string, fuso = FUSO_IGREJA): string {
+  const p = partesNoFuso(iso, fuso);
+  return `${p.hour === "24" ? "00" : p.hour}:${p.minute}`;
+}
