@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+/* Tema escuro por classe (o escuro é o visual principal do Servus). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------- tema claro (padrão) */
+:root {
+  --fundo: #faf7f8;
+  --superficie: #ffffff;
+  --superficie-2: #f4eef0;
+  --borda: #e6dade0;
+  --borda-forte: #d3c1c9;
+  --texto: #1a1216;
+  --texto-suave: #6b5560;
+  --vinho: #8a1c3b;
+  --vinho-profundo: #5e1228;
+  --vinho-claro: #b23a5b;
+  --vinho-tenue: #f7e9ee;
+  --sucesso: #2e9e6b;
+  --alerta: #b8811f;
+  --erro: #c53838;
+  --sombra: 0 1px 2px rgb(26 18 22 / 0.06), 0 8px 24px -12px rgb(26 18 22 / 0.18);
+}
+
+/* -------------------------------------------------------- tema escuro */
+.dark {
+  --fundo: #0d0a0c;
+  --superficie: #171215;
+  --superficie-2: #1f1820;
+  --borda: #2c232a;
+  --borda-forte: #3e323a;
+  --texto: #f3ebee;
+  --texto-suave: #c9b8bf;
+  --vinho: #a52548;
+  --vinho-profundo: #5e1228;
+  --vinho-claro: #d1587a;
+  --vinho-tenue: #2a121b;
+  --sucesso: #34b87c;
+  --alerta: #e0a32e;
+  --erro: #e05a5a;
+  --sombra: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px -16px rgb(0 0 0 / 0.7);
+}
+
+@theme inline {
+  --color-fundo: var(--fundo);
+  --color-superficie: var(--superficie);
+  --color-superficie-2: var(--superficie-2);
+  --color-borda: var(--borda);
+  --color-borda-forte: var(--borda-forte);
+  --color-texto: var(--texto);
+  --color-texto-suave: var(--texto-suave);
+  --color-vinho: var(--vinho);
+  --color-vinho-profundo: var(--vinho-profundo);
+  --color-vinho-claro: var(--vinho-claro);
+  --color-vinho-tenue: var(--vinho-tenue);
+  --color-sucesso: var(--sucesso);
+  --color-alerta: var(--alerta);
+  --color-erro: var(--erro);
+
+  --font-sans: var(--fonte-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--fonte-serif), ui-serif, Georgia, serif;
+
+  --shadow-suave: var(--sombra);
+}
+
+@layer base {
+  * {
+    border-color: var(--borda);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--fundo);
+    color: var(--texto);
+    font-family: var(--fonte-sans), ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    /* respiro para a barra de navegação inferior no celular */
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  h1, h2, h3 {
+    font-family: var(--fonte-serif), ui-serif, Georgia, serif;
+    letter-spacing: -0.01em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--vinho-claro);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--vinho);
+    color: #fff;
+  }
+}
+
+/* Realce sutil em vinho usado nos cabeçalhos e cards de destaque */
+.brilho-vinho {
+  background-image: radial-gradient(120% 140% at 0% 0%, var(--vinho-tenue) 0%, transparent 60%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
