@@ -10,7 +10,7 @@ export async function agruparFuncoes(): Promise<FuncaoAgrupada[]> {
     const nome = funcao.ministerio?.nome ?? "Sem ministério";
     const grupo = grupos.get(nome) ?? {
       ministerio: nome,
-      cor: funcao.ministerio?.cor ?? "#8A1C3B",
+      cor: funcao.ministerio?.cor ?? "#1E5AA8",
       funcoes: [],
     };
     grupo.funcoes.push({ id: funcao.id, nome: funcao.nome });

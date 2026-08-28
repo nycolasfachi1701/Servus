@@ -93,7 +93,7 @@ export function FormularioLogin({
       <button
         type="button"
         onClick={() => setModoLink((v) => !v)}
-        className="mt-4 w-full text-center text-sm text-texto-suave underline-offset-4 hover:text-vinho hover:underline"
+        className="mt-4 w-full text-center text-sm text-texto-suave underline-offset-4 hover:text-primaria hover:underline"
       >
         {modoLink ? "Entrar com e-mail e senha" : "Prefiro receber um link por e-mail"}
       </button>

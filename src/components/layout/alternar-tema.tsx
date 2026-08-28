@@ -8,7 +8,7 @@ const CHAVE = "servus-tema";
 
 /** Alterna entre o tema escuro (padrão) e o claro, guardando a escolha. */
 export function AlternarTema({ className }: { className?: string }) {
-  const [escuro, setEscuro] = useState(true);
+  const [escuro, setEscuro] = useState(false);
 
   useEffect(() => {
     setEscuro(document.documentElement.classList.contains("dark"));
@@ -31,7 +31,7 @@ export function AlternarTema({ className }: { className?: string }) {
       onClick={alternar}
       aria-pressed={escuro}
       className={cn(
-        "inline-flex h-10 w-10 items-center justify-center rounded-xl border border-borda bg-superficie text-texto-suave transition-colors hover:text-vinho",
+        "inline-flex h-10 w-10 items-center justify-center rounded-xl border border-borda bg-superficie text-texto-suave transition-colors hover:text-primaria",
         className,
       )}
     >

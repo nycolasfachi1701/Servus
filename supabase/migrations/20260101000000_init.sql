@@ -72,7 +72,7 @@ create unique index convites_email_idx on public.convites (lower(email)) where u
 create table public.ministerios (
   id            uuid primary key default gen_random_uuid(),
   nome          text not null unique,
-  cor           text not null default '#8A1C3B',
+  cor           text not null default '#1E5AA8',
   descricao     text,
   criado_em     timestamptz not null default now(),
   atualizado_em timestamptz not null default now()
@@ -198,7 +198,7 @@ create table public.configuracoes (
   id                  smallint primary key default 1 check (id = 1),
   nome_igreja         text not null default 'Servus',
   logo_url            text,
-  cor_primaria        text not null default '#8A1C3B',
+  cor_primaria        text not null default '#1E5AA8',
   mensagem_titulo     text not null default 'Escala de {periodo}',
   mensagem_despedida  text not null default 'Deus abençoe! Qualquer imprevisto, avise a liderança.',
   limite_escalas_mes  smallint not null default 6 check (limite_escalas_mes between 1 and 31),

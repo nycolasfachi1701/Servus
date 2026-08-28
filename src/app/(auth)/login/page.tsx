@@ -23,7 +23,7 @@ export default async function PaginaLogin({
 
       <p className="mt-5 text-center text-sm text-texto-suave">
         Ainda não tem acesso?{" "}
-        <Link href="/cadastro" className="font-medium text-vinho hover:underline">
+        <Link href="/cadastro" className="font-medium text-primaria hover:underline">
           Criar minha conta
         </Link>
       </p>

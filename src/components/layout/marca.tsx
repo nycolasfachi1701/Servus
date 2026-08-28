@@ -21,7 +21,7 @@ export function Marca({
     <div className={cn("flex items-center gap-3", className)}>
       <span
         className={cn(
-          "grid place-items-center overflow-hidden rounded-2xl border border-vinho/40 bg-vinho-tenue",
+          "grid place-items-center overflow-hidden rounded-2xl border border-primaria/40 bg-primaria-tenue",
           caixa,
         )}
         aria-hidden="true"
@@ -31,10 +31,10 @@ export function Marca({
           <img src={logoUrl} alt="" className="h-full w-full object-cover" />
         ) : (
         <svg viewBox="0 0 24 24" className="h-2/3 w-2/3" fill="none" aria-hidden="true">
-          <path d="M12 3v14M8 7h8" stroke="var(--vinho)" strokeWidth="2" strokeLinecap="round" />
+          <path d="M12 3v14M8 7h8" stroke="var(--primaria)" strokeWidth="2" strokeLinecap="round" />
           <path
             d="M17 14.5c0 2.8-2.2 4.5-5 4.5s-5-1.7-5-4.5"
-            stroke="var(--vinho-claro)"
+            stroke="var(--primaria-clara)"
             strokeWidth="1.8"
             strokeLinecap="round"
           />

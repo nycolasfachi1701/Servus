@@ -59,7 +59,7 @@ export function FormularioGerar({
       </div>
 
       <label className="flex items-start gap-2 text-sm">
-        <input type="checkbox" name="substituir" className="mt-0.5 h-4 w-4 accent-[var(--vinho)]" />
+        <input type="checkbox" name="substituir" className="mt-0.5 h-4 w-4 accent-[var(--primaria)]" />
         <span>
           Refazer as escalas já montadas do período
           <span className="block text-xs text-texto-suave">

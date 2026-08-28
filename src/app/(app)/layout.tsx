@@ -15,17 +15,17 @@ export default async function LayoutApp({ children }: { children: React.ReactNod
   const itens = itensVisiveis(sessao);
   const atalhos = itensBarraInferior(sessao);
 
-  // Cor de destaque configurável pela igreja (mantendo o vinho como padrão).
+  // Cor de destaque configurável pela igreja (mantendo o primaria como padrão).
   const cor = /^#[0-9a-fA-F]{6}$/.test(config.cor_primaria) ? config.cor_primaria : null;
 
   return (
     <div className="min-h-dvh md:flex">
-      {cor && cor.toLowerCase() !== "#8a1c3b" ? (
-        <style>{`:root,.dark{--vinho:${cor};--vinho-claro:color-mix(in srgb, ${cor}, white 18%);--vinho-tenue:color-mix(in srgb, ${cor} 12%, var(--superficie));}`}</style>
+      {cor && cor.toLowerCase() !== "#1e5aa8" ? (
+        <style>{`:root,.dark{--primaria:${cor};--primaria-clara:color-mix(in srgb, ${cor}, white 18%);--primaria-tenue:color-mix(in srgb, ${cor} 12%, var(--superficie));}`}</style>
       ) : null}
       {/* ------------------------------------------------ menu lateral */}
       <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col border-r border-borda bg-superficie md:flex">
-        <div className="brilho-vinho border-b border-borda px-4 py-5">
+        <div className="brilho-primario border-b border-borda px-4 py-5">
           <Marca nomeIgreja={config.nome_igreja} logoUrl={config.logo_url} />
         </div>
         <div className="flex-1 overflow-y-auto p-3">

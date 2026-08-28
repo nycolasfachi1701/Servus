@@ -107,7 +107,7 @@ export default async function PaginaMinhasEscalas() {
                       <div>
                         <p className="font-medium">
                           {rotuloCulto(culto, tipos)} ·{" "}
-                          <span className="text-vinho">
+                          <span className="text-primaria">
                             {funcoes.get(item.funcao_id)?.nome ?? "Função"}
                           </span>
                         </p>
@@ -162,7 +162,7 @@ export default async function PaginaMinhasEscalas() {
         <Cartao>
           <CartaoCorpo>
             <h2 className="mb-3 flex items-center gap-2 text-base font-semibold">
-              <CalendarCheck className="h-4 w-4 text-vinho" aria-hidden="true" />
+              <CalendarCheck className="h-4 w-4 text-primaria" aria-hidden="true" />
               Já servi recentemente
             </h2>
             <ul className="divide-y divide-borda text-sm">

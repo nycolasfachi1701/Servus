@@ -113,7 +113,7 @@ export default async function PaginaPainel({
         <Alerta tom="alerta">Essa área é restrita à liderança da igreja.</Alerta>
       ) : null}
 
-      <header className="brilho-vinho rounded-2xl border border-borda bg-superficie p-5">
+      <header className="brilho-primario rounded-2xl border border-borda bg-superficie p-5">
         <p className="text-sm text-texto-suave">
           {saudacao()}, {primeiroNome(sessao.nome)}
         </p>
@@ -142,7 +142,7 @@ export default async function PaginaPainel({
           </Cartao>
           <Cartao className="p-4">
             <div className="flex items-center gap-3">
-              <span className="grid h-10 w-10 place-items-center rounded-xl bg-vinho-tenue text-vinho">
+              <span className="grid h-10 w-10 place-items-center rounded-xl bg-primaria-tenue text-primaria">
                 <Sparkles className="h-5 w-5" />
               </span>
               <div>
@@ -252,7 +252,7 @@ export default async function PaginaPainel({
                     {sessao.ehLideranca ? (
                       <Link
                         href={`/escalas/${culto.id}`}
-                        className="mt-2 inline-block text-xs font-medium text-vinho hover:underline"
+                        className="mt-2 inline-block text-xs font-medium text-primaria hover:underline"
                       >
                         Abrir escala
                       </Link>
@@ -272,7 +272,7 @@ export default async function PaginaPainel({
             <CartaoCabecalho
               titulo={
                 <span className="flex items-center gap-2">
-                  <Cake className="h-4 w-4 text-vinho" aria-hidden="true" /> Aniversariantes da semana
+                  <Cake className="h-4 w-4 text-primaria" aria-hidden="true" /> Aniversariantes da semana
                 </span>
               }
             />
@@ -303,7 +303,7 @@ export default async function PaginaPainel({
           <CartaoCabecalho
             titulo={
               <span className="flex items-center gap-2">
-                <PartyPopper className="h-4 w-4 text-vinho" aria-hidden="true" /> Próximos eventos
+                <PartyPopper className="h-4 w-4 text-primaria" aria-hidden="true" /> Próximos eventos
               </span>
             }
             acao={
@@ -319,7 +319,7 @@ export default async function PaginaPainel({
               <ul className="space-y-2">
                 {(eventos as Evento[]).map((evento) => (
                   <li key={evento.id} className="flex items-start gap-3">
-                    <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-superficie-2 text-vinho">
+                    <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-superficie-2 text-primaria">
                       <CalendarClock className="h-4 w-4" aria-hidden="true" />
                     </span>
                     <div className="min-w-0">

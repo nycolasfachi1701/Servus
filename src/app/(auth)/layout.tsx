@@ -3,7 +3,7 @@ import { AlternarTema } from "@/components/layout/alternar-tema";
 
 export default function LayoutAutenticacao({ children }: { children: React.ReactNode }) {
   return (
-    <div className="brilho-vinho flex min-h-dvh flex-col items-center justify-center px-4 py-10">
+    <div className="brilho-primario flex min-h-dvh flex-col items-center justify-center px-4 py-10">
       <div className="absolute right-4 top-4">
         <AlternarTema />
       </div>

@@ -27,7 +27,7 @@ export async function salvarConfiguracoes(
   const dados = {
     nome_igreja: nome,
     logo_url: String(formData.get("logo_url") ?? "").trim() || null,
-    cor_primaria: String(formData.get("cor_primaria") ?? "#8A1C3B"),
+    cor_primaria: String(formData.get("cor_primaria") ?? "#1E5AA8"),
     mensagem_titulo: String(formData.get("mensagem_titulo") ?? "").trim() || "Escala de {periodo}",
     mensagem_despedida: String(formData.get("mensagem_despedida") ?? "").trim(),
     limite_escalas_mes: numero("limite_escalas_mes", 6, 1, 31),

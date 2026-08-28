@@ -32,11 +32,11 @@ on conflict (id) do nothing;
 
 -- --------------------------------------------------------- ministérios
 insert into public.ministerios (id, nome, cor, descricao) values
-  ('b0000000-0000-4000-8000-000000000001', 'Louvor',    '#8A1C3B', 'Ministério de música e adoração'),
-  ('b0000000-0000-4000-8000-000000000002', 'Som e Mídia','#4C6EF5', 'Mesa de som, projeção e transmissão'),
+  ('b0000000-0000-4000-8000-000000000001', 'Louvor',    '#1E5AA8', 'Ministério de música e adoração'),
+  ('b0000000-0000-4000-8000-000000000002', 'Som e Mídia','#0E7C86', 'Mesa de som, projeção e transmissão'),
   ('b0000000-0000-4000-8000-000000000003', 'Recepção',  '#2E9E6B', 'Acolhimento e recepção'),
   ('b0000000-0000-4000-8000-000000000004', 'Infantil',  '#E0A32E', 'Ministério com crianças'),
-  ('b0000000-0000-4000-8000-000000000005', 'Diaconato', '#7A4EAB', 'Serviço, ceia e ordem do culto')
+  ('b0000000-0000-4000-8000-000000000005', 'Diaconato', '#6B5BD2', 'Serviço, ceia e ordem do culto')
 on conflict (id) do nothing;
 
 insert into public.ministerio_lideres (ministerio_id, pessoa_id) values

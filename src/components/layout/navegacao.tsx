@@ -59,7 +59,7 @@ function LinkNav({
       className={cn(
         "flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium transition-colors",
         ativo
-          ? "bg-vinho-tenue text-vinho"
+          ? "bg-primaria-tenue text-primaria"
           : "text-texto-suave hover:bg-superficie-2 hover:text-texto",
       )}
     >
@@ -124,7 +124,7 @@ export function BarraInferior({
                   aria-current={ativo ? "page" : undefined}
                   className={cn(
                     "flex flex-col items-center gap-1 py-2 text-[11px] font-medium",
-                    ativo ? "text-vinho" : "text-texto-suave",
+                    ativo ? "text-primaria" : "text-texto-suave",
                   )}
                 >
                   <Icone className="h-5 w-5" aria-hidden="true" />

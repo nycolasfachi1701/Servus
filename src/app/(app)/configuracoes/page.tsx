@@ -71,7 +71,7 @@ export default async function PaginaConfiguracoes() {
                       </p>
                     </div>
                     {ehVoce ? (
-                      <Etiqueta tom="vinho">{ROTULO_PAPEL[usuario.papel]}</Etiqueta>
+                      <Etiqueta tom="primaria">{ROTULO_PAPEL[usuario.papel]}</Etiqueta>
                     ) : (
                       <form action={alterarPapel} className="flex gap-2">
                         <input type="hidden" name="usuario_id" value={usuario.id} />

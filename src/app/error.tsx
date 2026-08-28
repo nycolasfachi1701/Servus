@@ -11,7 +11,7 @@ export default function Erro({ reset }: { error: Error; reset: () => void }) {
       <button
         type="button"
         onClick={reset}
-        className="mt-2 inline-flex h-10 items-center rounded-xl bg-vinho px-4 text-sm font-medium text-white hover:bg-vinho-claro"
+        className="mt-2 inline-flex h-10 items-center rounded-xl bg-primaria px-4 text-sm font-medium text-white hover:bg-primaria-clara"
       >
         Tentar novamente
       </button>

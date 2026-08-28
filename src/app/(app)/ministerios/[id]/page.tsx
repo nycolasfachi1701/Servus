@@ -218,7 +218,7 @@ export default async function PaginaMinisterio({
               <ul className="flex flex-wrap gap-2">
                 {[...idsLideres].map((pessoaId) => (
                   <li key={pessoaId} className="flex items-center gap-2">
-                    <Etiqueta tom="vinho">{mapaPessoas.get(pessoaId)?.nome ?? "Pessoa"}</Etiqueta>
+                    <Etiqueta tom="primaria">{mapaPessoas.get(pessoaId)?.nome ?? "Pessoa"}</Etiqueta>
                     {sessao.ehAdmin ? (
                       <form action={definirLider}>
                         <input type="hidden" name="ministerio_id" value={ministerio.id} />

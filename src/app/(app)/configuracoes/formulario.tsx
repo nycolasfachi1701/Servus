@@ -39,7 +39,7 @@ export function FormularioConfiguracoes({ config }: { config: Configuracoes }) {
           <Campo
             rotulo="Cor principal"
             htmlFor="cor_primaria"
-            dica="O sistema usa o vinho como cor de destaque; ajuste se a sua igreja usar outro tom."
+            dica="O sistema usa o primaria como cor de destaque; ajuste se a sua igreja usar outro tom."
           >
             <input
               id="cor_primaria"

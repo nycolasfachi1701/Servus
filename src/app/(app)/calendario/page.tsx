@@ -33,7 +33,7 @@ type ItemCalendario = {
 };
 
 const CORES: Record<TipoItem, string> = {
-  culto: "var(--vinho)",
+  culto: "var(--primaria)",
   evento: "#4C6EF5",
   aniversario: "#E0A32E",
 };
@@ -205,7 +205,7 @@ export default async function PaginaCalendario({
               )}
               className={`rounded-full border px-3 py-1 text-xs font-medium ${
                 filtroTipo === tipo
-                  ? "border-vinho bg-vinho-tenue text-vinho"
+                  ? "border-primaria bg-primaria-tenue text-primaria"
                   : "border-borda text-texto-suave hover:text-texto"
               }`}
             >
@@ -237,14 +237,14 @@ export default async function PaginaCalendario({
           <div className="mb-3 flex items-center justify-between gap-2">
             <Link
               href={`/calendario${paramsBase({ mes: anterior })}`}
-              className="rounded-lg border border-borda px-2 py-1 text-sm text-texto-suave hover:text-vinho"
+              className="rounded-lg border border-borda px-2 py-1 text-sm text-texto-suave hover:text-primaria"
             >
               ‹
             </Link>
             <h2 className="font-serif text-lg font-semibold capitalize">{nomeMes}</h2>
             <Link
               href={`/calendario${paramsBase({ mes: proximo })}`}
-              className="rounded-lg border border-borda px-2 py-1 text-sm text-texto-suave hover:text-vinho"
+              className="rounded-lg border border-borda px-2 py-1 text-sm text-texto-suave hover:text-primaria"
             >
               ›
             </Link>
@@ -271,12 +271,12 @@ export default async function PaginaCalendario({
                   aria-current={selecionado ? "date" : undefined}
                   className={`flex min-h-14 flex-col items-center rounded-xl border p-1 transition-colors ${
                     selecionado
-                      ? "border-vinho bg-vinho-tenue"
+                      ? "border-primaria bg-primaria-tenue"
                       : "border-transparent hover:border-borda"
                   }`}
                 >
                   <span
-                    className={`text-sm ${ehHoje ? "font-bold text-vinho" : selecionado ? "text-vinho" : ""}`}
+                    className={`text-sm ${ehHoje ? "font-bold text-primaria" : selecionado ? "text-primaria" : ""}`}
                   >
                     {Number(dia.slice(8, 10))}
                   </span>
