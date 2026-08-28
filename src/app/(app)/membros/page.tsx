@@ -53,14 +53,17 @@ export default async function PaginaMembros({
     }
   }
 
+  // Ministério sem ninguém vinculado: nem vale ir ao banco.
+  const semResultado = idsDoMinisterio?.length === 0;
+
   let consulta = supabase.from("pessoas").select("*").order("nome");
   if (filtros.q) consulta = consulta.ilike("nome", `%${filtros.q}%`);
   if (filtros.status) consulta = consulta.eq("status", filtros.status as StatusPessoa);
-  if (idsDoMinisterio) {
-    consulta = consulta.in("id", idsDoMinisterio.length > 0 ? idsDoMinisterio : ["sem-resultado"]);
+  if (idsDoMinisterio && idsDoMinisterio.length > 0) {
+    consulta = consulta.in("id", idsDoMinisterio);
   }
 
-  const { data } = await consulta;
+  const { data } = semResultado ? { data: [] as Pessoa[] } : await consulta;
   let membros = (data ?? []) as Pessoa[];
 
   const mesAtual = `${new Date().getMonth() + 1}`.padStart(2, "0");

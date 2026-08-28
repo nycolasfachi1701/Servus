@@ -15,12 +15,18 @@ export default async function LayoutApp({ children }: { children: React.ReactNod
   const itens = itensVisiveis(sessao);
   const atalhos = itensBarraInferior(sessao);
 
+  // Cor de destaque configurável pela igreja (mantendo o vinho como padrão).
+  const cor = /^#[0-9a-fA-F]{6}$/.test(config.cor_primaria) ? config.cor_primaria : null;
+
   return (
     <div className="min-h-dvh md:flex">
+      {cor && cor.toLowerCase() !== "#8a1c3b" ? (
+        <style>{`:root,.dark{--vinho:${cor};--vinho-claro:color-mix(in srgb, ${cor}, white 18%);--vinho-tenue:color-mix(in srgb, ${cor} 12%, var(--superficie));}`}</style>
+      ) : null}
       {/* ------------------------------------------------ menu lateral */}
       <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col border-r border-borda bg-superficie md:flex">
         <div className="brilho-vinho border-b border-borda px-4 py-5">
-          <Marca nomeIgreja={config.nome_igreja} />
+          <Marca nomeIgreja={config.nome_igreja} logoUrl={config.logo_url} />
         </div>
         <div className="flex-1 overflow-y-auto p-3">
           <MenuLateral itens={itens} />
@@ -41,7 +47,7 @@ export default async function LayoutApp({ children }: { children: React.ReactNod
       {/* ---------------------------------------------------- conteúdo */}
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="sticky top-0 z-30 flex items-center justify-between gap-3 border-b border-borda bg-superficie/95 px-4 py-3 backdrop-blur md:hidden">
-          <Marca tamanho="sm" nomeIgreja={config.nome_igreja} />
+          <Marca tamanho="sm" nomeIgreja={config.nome_igreja} logoUrl={config.logo_url} />
           <Avatar nome={sessao.nome} fotoUrl={sessao.fotoUrl} tamanho="sm" />
         </header>
 

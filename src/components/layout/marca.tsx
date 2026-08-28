@@ -4,10 +4,12 @@ import { cn } from "@/lib/utils";
 export function Marca({
   tamanho = "md",
   nomeIgreja,
+  logoUrl,
   className,
 }: {
   tamanho?: "sm" | "md" | "lg";
   nomeIgreja?: string;
+  logoUrl?: string | null;
   className?: string;
 }) {
   const caixa =
@@ -19,11 +21,15 @@ export function Marca({
     <div className={cn("flex items-center gap-3", className)}>
       <span
         className={cn(
-          "grid place-items-center rounded-2xl border border-vinho/40 bg-vinho-tenue",
+          "grid place-items-center overflow-hidden rounded-2xl border border-vinho/40 bg-vinho-tenue",
           caixa,
         )}
         aria-hidden="true"
       >
+        {logoUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={logoUrl} alt="" className="h-full w-full object-cover" />
+        ) : (
         <svg viewBox="0 0 24 24" className="h-2/3 w-2/3" fill="none" aria-hidden="true">
           <path d="M12 3v14M8 7h8" stroke="var(--vinho)" strokeWidth="2" strokeLinecap="round" />
           <path
@@ -33,6 +39,7 @@ export function Marca({
             strokeLinecap="round"
           />
         </svg>
+        )}
       </span>
       <span className="min-w-0">
         <span className={cn("block font-serif font-semibold leading-none text-texto", titulo)}>
