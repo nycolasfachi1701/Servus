@@ -6,7 +6,7 @@ const PADRAO: Configuracoes = {
   id: 1,
   nome_igreja: "Servus",
   logo_url: null,
-  cor_primaria: "#8A1C3B",
+  cor_primaria: "#1E5AA8",
   mensagem_titulo: "Escala de {periodo}",
   mensagem_despedida: "Deus abençoe!",
   limite_escalas_mes: 6,

@@ -1,10 +1,10 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-type Tom = "vinho" | "neutro" | "sucesso" | "alerta" | "erro";
+type Tom = "primaria" | "neutro" | "sucesso" | "alerta" | "erro";
 
 const TONS: Record<Tom, string> = {
-  vinho: "bg-vinho-tenue text-vinho border-vinho/30",
+  primaria: "bg-primaria-tenue text-primaria border-primaria/30",
   neutro: "bg-superficie-2 text-texto-suave border-borda",
   sucesso: "bg-sucesso/10 text-sucesso border-sucesso/30",
   alerta: "bg-alerta/10 text-alerta border-alerta/30",

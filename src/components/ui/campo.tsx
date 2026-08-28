@@ -2,7 +2,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const CONTROLE =
-  "w-full rounded-xl border border-borda bg-superficie px-3 py-2 text-sm text-texto placeholder:text-texto-suave/70 transition-colors focus:border-vinho focus:outline-none focus-visible:outline-none disabled:opacity-60";
+  "w-full rounded-xl border border-borda bg-superficie px-3 py-2 text-sm text-texto placeholder:text-texto-suave/70 transition-colors focus:border-primaria focus:outline-none focus-visible:outline-none disabled:opacity-60";
 
 export function Rotulo({ className, ...props }: React.LabelHTMLAttributes<HTMLLabelElement>) {
   return (
@@ -61,7 +61,7 @@ export function Campo({
     <div className={className}>
       <Rotulo htmlFor={htmlFor}>
         {rotulo}
-        {obrigatorio ? <span className="ml-0.5 text-vinho">*</span> : null}
+        {obrigatorio ? <span className="ml-0.5 text-primaria">*</span> : null}
       </Rotulo>
       {children}
       {dica ? <p className="mt-1 text-xs text-texto-suave">{dica}</p> : null}

@@ -99,7 +99,7 @@ export default async function PaginaEscalaCulto({
     <div className="space-y-5">
       <Link
         href="/escalas"
-        className="inline-flex items-center gap-1 text-sm text-texto-suave hover:text-vinho"
+        className="inline-flex items-center gap-1 text-sm text-texto-suave hover:text-primaria"
       >
         <ArrowLeft className="h-4 w-4" aria-hidden="true" />
         Voltar para escalas
@@ -181,7 +181,7 @@ export default async function PaginaEscalaCulto({
                   <div className="mb-2 flex items-center gap-2">
                     <span
                       className="h-2.5 w-2.5 rounded-full"
-                      style={{ backgroundColor: funcao?.ministerio?.cor ?? "#8A1C3B" }}
+                      style={{ backgroundColor: funcao?.ministerio?.cor ?? "#1E5AA8" }}
                       aria-hidden="true"
                     />
                     <h2 className="text-sm font-semibold">
@@ -234,7 +234,7 @@ export default async function PaginaEscalaCulto({
                     <input type="hidden" name="funcao_id" value={funcaoId} />
                     <button
                       type="submit"
-                      className="inline-flex items-center gap-1 text-xs font-medium text-vinho hover:underline"
+                      className="inline-flex items-center gap-1 text-xs font-medium text-primaria hover:underline"
                     >
                       <Plus className="h-3 w-3" aria-hidden="true" />
                       Mais uma vaga de {funcao?.nome ?? "função"}

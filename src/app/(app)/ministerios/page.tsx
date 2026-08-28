@@ -52,7 +52,7 @@ export default async function PaginaMinisterios() {
             const pessoas = pessoasPorMinisterio.get(ministerio.id)?.size ?? 0;
             return (
               <Link key={ministerio.id} href={`/ministerios/${ministerio.id}`}>
-                <Cartao className="h-full transition-colors hover:border-vinho">
+                <Cartao className="h-full transition-colors hover:border-primaria">
                   <CartaoCorpo>
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex min-w-0 items-center gap-2">

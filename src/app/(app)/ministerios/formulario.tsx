@@ -51,7 +51,7 @@ export function FormularioMinisterio({
             id={`cor-${ministerio?.id ?? "novo"}`}
             type="color"
             name="cor"
-            defaultValue={ministerio?.cor ?? "#8A1C3B"}
+            defaultValue={ministerio?.cor ?? "#1E5AA8"}
             className="h-10 w-16 cursor-pointer rounded-xl border border-borda bg-superficie p-1"
           />
         </Campo>

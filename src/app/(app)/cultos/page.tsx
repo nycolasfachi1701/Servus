@@ -113,7 +113,7 @@ export default async function PaginaCultos() {
                             <span className="inline-flex items-center gap-2 rounded-full border border-borda bg-superficie-2 px-3 py-1 text-sm">
                               <span
                                 className="h-2 w-2 rounded-full"
-                                style={{ backgroundColor: funcao?.ministerio?.cor ?? "#8A1C3B" }}
+                                style={{ backgroundColor: funcao?.ministerio?.cor ?? "#1E5AA8" }}
                                 aria-hidden="true"
                               />
                               {funcao?.nome ?? "Função"} × {vaga.quantidade}

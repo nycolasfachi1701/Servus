@@ -149,14 +149,14 @@ export function FormularioMembro({
                     {grupo.funcoes.map((funcao) => (
                       <label
                         key={funcao.id}
-                        className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-borda px-3 py-2 text-sm transition-colors has-[:checked]:border-vinho has-[:checked]:bg-vinho-tenue has-[:checked]:text-vinho"
+                        className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-borda px-3 py-2 text-sm transition-colors has-[:checked]:border-primaria has-[:checked]:bg-primaria-tenue has-[:checked]:text-primaria"
                       >
                         <input
                           type="checkbox"
                           name="funcoes"
                           value={funcao.id}
                           defaultChecked={selecionadas.has(funcao.id)}
-                          className="h-4 w-4 accent-[var(--vinho)]"
+                          className="h-4 w-4 accent-[var(--primaria)]"
                         />
                         {funcao.nome}
                       </label>

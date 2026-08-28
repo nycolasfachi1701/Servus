@@ -7,9 +7,9 @@ type Tamanho = "sm" | "md" | "lg" | "icone";
 
 const VARIANTES: Record<Variante, string> = {
   primario:
-    "bg-vinho text-white hover:bg-vinho-claro active:bg-vinho-profundo shadow-suave",
+    "bg-primaria text-white hover:bg-primaria-clara active:bg-primaria-profunda shadow-suave",
   secundario:
-    "bg-superficie-2 text-texto border border-borda hover:border-vinho hover:text-vinho",
+    "bg-superficie-2 text-texto border border-borda hover:border-primaria hover:text-primaria",
   fantasma: "text-texto-suave hover:bg-superficie-2 hover:text-texto",
   perigo: "bg-erro text-white hover:opacity-90",
   sucesso: "bg-sucesso text-white hover:opacity-90",

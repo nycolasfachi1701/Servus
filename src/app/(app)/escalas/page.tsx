@@ -117,7 +117,7 @@ export default async function PaginaEscalas({
         <Link
           href="/escalas"
           className={`rounded-xl px-3 py-1.5 text-sm font-medium ${
-            historico ? "text-texto-suave hover:text-texto" : "bg-vinho-tenue text-vinho"
+            historico ? "text-texto-suave hover:text-texto" : "bg-primaria-tenue text-primaria"
           }`}
         >
           Próximos cultos
@@ -125,7 +125,7 @@ export default async function PaginaEscalas({
         <Link
           href="/escalas?aba=historico"
           className={`rounded-xl px-3 py-1.5 text-sm font-medium ${
-            historico ? "bg-vinho-tenue text-vinho" : "text-texto-suave hover:text-texto"
+            historico ? "bg-primaria-tenue text-primaria" : "text-texto-suave hover:text-texto"
           }`}
         >
           Histórico
@@ -165,7 +165,7 @@ export default async function PaginaEscalas({
             return (
               <li key={culto.id}>
                 <Link href={`/escalas/${culto.id}`}>
-                  <Cartao className="transition-colors hover:border-vinho">
+                  <Cartao className="transition-colors hover:border-primaria">
                     <CartaoCorpo>
                       <div className="flex items-start justify-between gap-3">
                         <div className="min-w-0">

@@ -7,7 +7,7 @@ uso no **celular** (mobile-first) e em **português do Brasil**.
 - **Front:** Next.js 15 (App Router) + TypeScript + Tailwind CSS 4
 - **Back:** Supabase — Postgres, Auth, Row Level Security e Storage
 - **Hospedagem:** Vercel (free) + Supabase (free)
-- **Visual:** vinho e preto, temas claro e escuro (escuro é o principal)
+- **Visual:** azul e claro, temas claro e escuro (claro é o padrão)
 
 ---
 

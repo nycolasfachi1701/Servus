@@ -62,7 +62,7 @@ export function FormularioTipoCulto({ tipo }: { tipo?: TipoCulto }) {
             type="checkbox"
             name="ativo"
             defaultChecked={tipo?.ativo ?? true}
-            className="h-4 w-4 accent-[var(--vinho)]"
+            className="h-4 w-4 accent-[var(--primaria)]"
           />
           Ativo
         </label>

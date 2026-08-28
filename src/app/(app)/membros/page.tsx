@@ -16,10 +16,10 @@ import { formatarData, formatarTelefone } from "@/lib/utils";
 
 export const metadata: Metadata = { title: "Membros" };
 
-const TONS: Record<StatusPessoa, "sucesso" | "alerta" | "vinho" | "neutro"> = {
+const TONS: Record<StatusPessoa, "sucesso" | "alerta" | "primaria" | "neutro"> = {
   ativo: "sucesso",
   afastado: "alerta",
-  visitante: "vinho",
+  visitante: "primaria",
   inativo: "neutro",
 };
 
@@ -132,7 +132,7 @@ export default async function PaginaMembros({
               name="mes"
               value="1"
               defaultChecked={filtros.mes === "1"}
-              className="h-4 w-4 accent-[var(--vinho)]"
+              className="h-4 w-4 accent-[var(--primaria)]"
             />
             <Cake className="h-4 w-4" aria-hidden="true" />
             Só aniversariantes deste mês

@@ -15,7 +15,7 @@ export async function salvarMinisterio(
 
   const id = String(formData.get("id") ?? "");
   const nome = String(formData.get("nome") ?? "").trim();
-  const cor = String(formData.get("cor") ?? "#8A1C3B");
+  const cor = String(formData.get("cor") ?? "#1E5AA8");
   const descricao = String(formData.get("descricao") ?? "").trim() || null;
 
   if (nome.length < 2) return { erro: "Informe o nome do ministério." };

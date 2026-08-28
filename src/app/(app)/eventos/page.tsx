@@ -78,7 +78,7 @@ export default async function PaginaEventos() {
               </p>
             </div>
             {ministerio ? (
-              <Etiqueta tom="vinho">
+              <Etiqueta tom="primaria">
                 <span
                   className="h-2 w-2 rounded-full"
                   style={{ backgroundColor: ministerio.cor }}

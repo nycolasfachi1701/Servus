@@ -28,17 +28,17 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0D0A0C" },
-    { media: "(prefers-color-scheme: light)", color: "#FAF7F8" },
+    { media: "(prefers-color-scheme: dark)", color: "#0B1220" },
+    { media: "(prefers-color-scheme: light)", color: "#F5F7FA" },
   ],
 };
 
 /** Aplica o tema salvo antes da primeira pintura (evita "flash" claro). */
-const SCRIPT_TEMA = `try{var t=localStorage.getItem('servus-tema');if(t==='claro'){document.documentElement.classList.remove('dark')}else{document.documentElement.classList.add('dark')}}catch(e){}`;
+const SCRIPT_TEMA = `try{if(localStorage.getItem('servus-tema')==='escuro'){document.documentElement.classList.add('dark')}}catch(e){}`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`dark ${sans.variable} ${serif.variable}`} suppressHydrationWarning>
+    <html lang="pt-BR" className={`${sans.variable} ${serif.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: SCRIPT_TEMA }} />
       </head>

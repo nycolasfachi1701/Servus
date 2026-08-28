@@ -164,7 +164,7 @@ export default async function PaginaMembro({ params }: { params: Promise<{ id: s
                   {(vinculos ?? []).map((v) => {
                     const funcao = funcoes.get(v.funcao_id);
                     return (
-                      <Etiqueta key={v.funcao_id} tom="vinho">
+                      <Etiqueta key={v.funcao_id} tom="primaria">
                         {funcao?.ministerio?.nome ? `${funcao.ministerio.nome} · ` : ""}
                         {funcao?.nome ?? "Função"}
                       </Etiqueta>
@@ -189,7 +189,7 @@ export default async function PaginaMembro({ params }: { params: Promise<{ id: s
                         <div className="min-w-0">
                           <Link
                             href={`/escalas/${culto.id}`}
-                            className="truncate text-sm font-medium hover:text-vinho"
+                            className="truncate text-sm font-medium hover:text-primaria"
                           >
                             {rotuloCulto(culto, tipos)}
                           </Link>
