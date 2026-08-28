@@ -16,7 +16,8 @@ uso no **celular** (mobile-first) e em **português do Brasil**.
 ### 1.1 Crie o projeto no Supabase
 
 1. Acesse [supabase.com](https://supabase.com) → **New project** (plano free).
-2. Em **Project Settings → API**, copie a *Project URL* e a chave *anon public*.
+2. Em **Project Settings → API Keys**, copie a *Project URL* e a **Publishable
+   key** (`sb_publishable_...`) — nos projetos antigos ela se chama *anon public*.
 
 ### 1.2 Configure as variáveis de ambiente
 
@@ -26,13 +27,14 @@ cp .env.example .env.local
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://xxxxxxxx.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=chave-anon-publica
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_...
 # opcional: fuso usado para exibir e digitar datas de eventos
 # NEXT_PUBLIC_FUSO_IGREJA=America/Sao_Paulo
 ```
 
-> Nunca versione o `.env.local`. Só a chave **anon** é usada — o acesso aos
-> dados é decidido pelo RLS no banco, não pelo front.
+> Nunca versione o `.env.local`. Só a chave pública (*publishable*/*anon*) é
+> usada — a *secret key* (ou *service_role*) ignora o RLS e jamais deve ir para
+> o front. O acesso aos dados é decidido pelo RLS no banco.
 
 ### 1.3 Aplique as migrations
 
