@@ -1,38 +1,42 @@
-import {
-  CalendarDays,
-  CalendarRange,
-  CalendarCheck,
-  ClipboardList,
-  Cog,
-  Church,
-  HandHeart,
-  LayoutDashboard,
-  PartyPopper,
-  Users,
-  type LucideIcon,
-} from "lucide-react";
 import type { Sessao } from "@/lib/sessao";
+
+/**
+ * Chave do ícone — não o componente. Este módulo é lido pelo layout (que
+ * roda no servidor) e o resultado é enviado para o menu (componente de
+ * cliente): só dados serializáveis podem cruzar essa fronteira.
+ */
+export type IconeNav =
+  | "painel"
+  | "escalas"
+  | "minhas-escalas"
+  | "calendario"
+  | "membros"
+  | "disponibilidade"
+  | "eventos"
+  | "ministerios"
+  | "cultos"
+  | "configuracoes";
 
 export type ItemNav = {
   href: string;
   rotulo: string;
-  icone: LucideIcon;
+  icone: IconeNav;
   nivel: "todos" | "lideranca" | "admin";
   /** Aparece na barra inferior do celular. */
   destaque?: boolean;
 };
 
 export const ITENS_NAV: ItemNav[] = [
-  { href: "/painel", rotulo: "Painel", icone: LayoutDashboard, nivel: "todos", destaque: true },
-  { href: "/escalas", rotulo: "Escalas", icone: ClipboardList, nivel: "lideranca", destaque: true },
-  { href: "/minhas-escalas", rotulo: "Minhas escalas", icone: CalendarCheck, nivel: "todos", destaque: true },
-  { href: "/calendario", rotulo: "Calendário", icone: CalendarDays, nivel: "todos", destaque: true },
-  { href: "/membros", rotulo: "Membros", icone: Users, nivel: "lideranca", destaque: true },
-  { href: "/disponibilidade", rotulo: "Disponibilidade", icone: CalendarRange, nivel: "todos" },
-  { href: "/eventos", rotulo: "Eventos", icone: PartyPopper, nivel: "lideranca" },
-  { href: "/ministerios", rotulo: "Ministérios", icone: HandHeart, nivel: "lideranca" },
-  { href: "/cultos", rotulo: "Cultos", icone: Church, nivel: "lideranca" },
-  { href: "/configuracoes", rotulo: "Configurações", icone: Cog, nivel: "admin" },
+  { href: "/painel", rotulo: "Painel", icone: "painel", nivel: "todos", destaque: true },
+  { href: "/escalas", rotulo: "Escalas", icone: "escalas", nivel: "lideranca", destaque: true },
+  { href: "/minhas-escalas", rotulo: "Minhas escalas", icone: "minhas-escalas", nivel: "todos", destaque: true },
+  { href: "/calendario", rotulo: "Calendário", icone: "calendario", nivel: "todos", destaque: true },
+  { href: "/membros", rotulo: "Membros", icone: "membros", nivel: "lideranca", destaque: true },
+  { href: "/disponibilidade", rotulo: "Disponibilidade", icone: "disponibilidade", nivel: "todos" },
+  { href: "/eventos", rotulo: "Eventos", icone: "eventos", nivel: "lideranca" },
+  { href: "/ministerios", rotulo: "Ministérios", icone: "ministerios", nivel: "lideranca" },
+  { href: "/cultos", rotulo: "Cultos", icone: "cultos", nivel: "lideranca" },
+  { href: "/configuracoes", rotulo: "Configurações", icone: "configuracoes", nivel: "admin" },
 ];
 
 export function itensVisiveis(sessao: Pick<Sessao, "ehAdmin" | "ehLideranca">): ItemNav[] {
