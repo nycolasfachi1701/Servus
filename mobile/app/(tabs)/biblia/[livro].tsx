@@ -9,7 +9,7 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
+import { useLocalSearchParams, useNavigation } from "expo-router";
 import { useSQLiteContext } from "expo-sqlite";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lerCapitulo, obterLivro, referencia, type Livro, type Versiculo } from "@/lib/biblia";
@@ -28,7 +28,6 @@ import { CHAVE_ULTIMA_LEITURA } from "./index";
 export default function LeitorBiblia() {
   const cores = useCores();
   const db = useSQLiteContext();
-  const router = useRouter();
   const navegacao = useNavigation();
   const params = useLocalSearchParams<{ livro: string; capitulo?: string }>();
 

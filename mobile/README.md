@@ -54,6 +54,28 @@ curl -L -o .cache/aa.json https://raw.githubusercontent.com/thiagobodruk/biblia/
 python3 scripts/gerar-biblia.py .cache/aa.json assets/db/biblia.db
 ```
 
+## O que dá para fazer pelo app
+
+**Qualquer membro:** ver as próximas escalas e confirmar presença, informar
+disponibilidade por culto, acompanhar cultos e eventos, ler a Bíblia, destacar
+versículos e escrever anotações.
+
+**Liderança (líder de ministério e admin):** tudo acima, mais —
+
+- **Escalas:** gerar a escala de um período com o rodízio justo, trocar
+  qualquer pessoa manualmente, adicionar/remover vagas, marcar o culto como
+  finalizado e enviar a escala pronta no WhatsApp.
+- **Membros:** cadastro completo com foto, busca, filtro por status, funções.
+- **Ministérios:** funções, equipe de cada função e liderança.
+- **Cultos:** tipos recorrentes, vagas por função, geração das ocorrências e
+  cultos avulsos.
+- **Eventos:** programação da igreja com imagem, local e ministério.
+- **Configurações (só admin):** dados da igreja, mensagem do WhatsApp, limite
+  do rodízio, papéis dos usuários e convites de acesso.
+
+Um líder só mexe nas funções do próprio ministério — quem garante isso é o
+RLS no banco, não a interface.
+
 ## Estrutura
 
 ```
@@ -61,13 +83,23 @@ app/                    rotas (expo-router)
   (auth)/               login e cadastro
   (tabs)/               Início, Escalas, Bíblia, Mais
     biblia/             índice, leitor e busca
+  gestao/               área da liderança
+    escalas/            lista, geração e escala de cada culto
+    membros/            lista, ficha e cadastro
+    ministerios/        lista e detalhe (funções, equipe, liderança)
+    cultos.tsx          tipos de culto, vagas e ocorrências
+    eventos.tsx         programação
+    configuracoes.tsx   igreja, usuários e convites
   disponibilidade.tsx   "posso / não posso" por culto
   anotacoes.tsx         o que a pessoa marcou na Bíblia
-src/lib/                supabase, sessão, tema, dados, bíblia, anotações
-src/componentes/        UI (botões, cartões, campos) e ícones
+src/lib/                supabase, sessão, tema, dados, gestão, bíblia
+src/componentes/        UI (botões, cartões, campos), seletor e ícones
 assets/db/biblia.db     Bíblia embutida
 scripts/gerar-biblia.py gerador do banco da Bíblia
 ```
+
+> O algoritmo do rodízio mora em `../compartilhado/escala/`, usado pelo app e
+> pelo site — uma regra só, num lugar só.
 
 ## Publicando nas lojas
 

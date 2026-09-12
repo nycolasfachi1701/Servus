@@ -4,7 +4,7 @@ import {
   rotuloPeriodo as rotulo,
   type CultoParaMensagem,
   type LinhaEscala,
-} from "../../../compartilhado/escala/mensagem";
+} from "@compartilhado/escala/mensagem";
 
 export type { CultoParaMensagem, LinhaEscala };
 

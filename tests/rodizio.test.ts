@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { gerarEscala, type EntradaGeracao } from "../src/lib/escala/rodizio.ts";
+import { gerarEscala, type EntradaGeracao } from "../compartilhado/escala/rodizio.ts";
 
 const PESOS = { rodizio: 10, preferencia: 3, dupla: 2 };
 

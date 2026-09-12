@@ -1,3 +1,4 @@
+import { gerarEscala } from "@compartilhado/escala/rodizio";
 import { supabase } from "@/lib/supabase";
 import { hojeChave, somarDias } from "@/lib/utils";
 import type {
@@ -225,3 +226,6 @@ export async function responderDisponibilidade(
 
   if (error) throw error;
 }
+
+/** Reexporta o gerador compartilhado para as telas de escala. */
+export { gerarEscala };
