@@ -2,7 +2,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Alert, Pressable, ScrollView, Share, Text, TextInput, View } from "react-native";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { useSQLiteContext } from "expo-sqlite";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lerCapitulo, obterLivro, referencia, type Livro, type Versiculo } from "@/lib/biblia";
 import {
   anotacoesDoCapitulo,
@@ -15,12 +14,14 @@ import { ESPACO, RAIO, useCores } from "@/lib/tema";
 import { Botao, Carregando, Corpo, Mini, Separador } from "@/componentes/ui";
 import { FolhaInferior } from "@/componentes/folha";
 import { Icone } from "@/componentes/icone";
-import { CHAVE_ULTIMA_LEITURA } from "./index";
+import { salvarUltimaLeitura } from "@/lib/leitura";
+import { useSessao } from "@/lib/sessao";
 
 export default function LeitorBiblia() {
   const cores = useCores();
   const db = useSQLiteContext();
   const navegacao = useNavigation();
+  const { sessao } = useSessao();
   const params = useLocalSearchParams<{ livro: string; capitulo?: string }>();
 
   const livroId = Number(params.livro);
@@ -60,11 +61,12 @@ export default function LeitorBiblia() {
   useEffect(() => {
     if (!livro) return;
     navegacao.setOptions({ title: `${livro.nome} ${capitulo}` });
-    void AsyncStorage.setItem(
-      CHAVE_ULTIMA_LEITURA,
-      JSON.stringify({ livro: livro.id, capitulo, nome: livro.nome }),
-    );
-  }, [livro, capitulo, navegacao]);
+    void salvarUltimaLeitura(sessao?.usuarioId ?? null, {
+      livro: livro.id,
+      capitulo,
+      nome: livro.nome,
+    });
+  }, [livro, capitulo, navegacao, sessao?.usuarioId]);
 
   const anotacaoSelecionada = useMemo(
     () => (selecionado ? anotacoes.get(selecionado.versiculo) : undefined),

@@ -2,20 +2,18 @@ import { useCallback, useEffect, useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { useFocusEffect, useRouter } from "expo-router";
 import { useSQLiteContext } from "expo-sqlite";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { listarLivros, type Livro } from "@/lib/biblia";
+import { lerUltimaLeitura, type UltimaLeitura } from "@/lib/leitura";
+import { useSessao } from "@/lib/sessao";
 import { ESPACO, RAIO, useCores } from "@/lib/tema";
 import { Cartao, Corpo, Mini, Subtitulo, Titulo } from "@/componentes/ui";
 import { Icone } from "@/componentes/icone";
-
-export const CHAVE_ULTIMA_LEITURA = "servus-biblia-ultima";
-
-type UltimaLeitura = { livro: number; capitulo: number; nome: string };
 
 export default function IndiceBiblia() {
   const cores = useCores();
   const router = useRouter();
   const db = useSQLiteContext();
+  const { sessao } = useSessao();
 
   const [livros, setLivros] = useState<Livro[]>([]);
   const [testamento, setTestamento] = useState<1 | 2>(1);
@@ -27,10 +25,8 @@ export default function IndiceBiblia() {
 
   useFocusEffect(
     useCallback(() => {
-      void AsyncStorage.getItem(CHAVE_ULTIMA_LEITURA).then((valor) => {
-        setUltima(valor ? (JSON.parse(valor) as UltimaLeitura) : null);
-      });
-    }, []),
+      void lerUltimaLeitura(sessao?.usuarioId ?? null).then(setUltima);
+    }, [sessao?.usuarioId]),
   );
 
   const doTestamento = livros.filter((l) => l.testamento === testamento);
