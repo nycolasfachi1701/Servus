@@ -3,9 +3,11 @@ import { View } from "react-native";
 import { Stack, useRouter, useSegments } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { configuracaoOk } from "@/lib/supabase";
 import { ProvedorSessao, useSessao } from "@/lib/sessao";
 import { useCores, useEhEscuro } from "@/lib/tema";
 import { Carregando } from "@/componentes/ui";
+import { SemConfiguracao } from "@/componentes/sem-configuracao";
 
 /** Manda para o login quem não está autenticado e para o app quem está. */
 function Guardiao() {
@@ -53,6 +55,15 @@ function Guardiao() {
 
 export default function LayoutRaiz() {
   const escuro = useEhEscuro();
+
+  if (!configuracaoOk) {
+    return (
+      <SafeAreaProvider>
+        <StatusBar style={escuro ? "light" : "dark"} />
+        <SemConfiguracao />
+      </SafeAreaProvider>
+    );
+  }
 
   return (
     <SafeAreaProvider>
