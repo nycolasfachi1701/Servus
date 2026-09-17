@@ -39,19 +39,44 @@ mesmos — quem é admin no site é admin no app.
 ## A Bíblia
 
 - Texto: **Almeida Revisada Imprensa Bíblica (1914)** — domínio público.
-- Fica em `assets/db/biblia.db`, um SQLite de 66 livros e 31.104 versículos
-  embutido no app: abre **sem internet** e a busca é instantânea.
+- **Palavras no original:** cada versículo pode ser aberto em hebraico ou
+  grego, palavra por palavra, com transliteração, número de Strong,
+  significado e a definição completa do léxico. 425.454 palavras etiquetadas
+  e 14.197 verbetes — 98,6% das palavras têm verbete.
+- Fica em `assets/db/biblia.db`, um SQLite de 40 MB embutido no app: abre
+  **sem internet** e a busca é instantânea.
 - A busca ignora acentos e maiúsculas (“coracao” acha “coração”) e exige que
   todas as palavras apareçam no versículo.
 - Destaques e anotações ficam no Supabase (tabela `biblia_anotacoes`), são
   **privados** — nem a liderança vê — e acompanham a pessoa se ela trocar de
   celular.
 
+### Fontes e créditos
+
+| Fonte | O que traz | Licença |
+| --- | --- | --- |
+| [Almeida Revisada IB 1914](https://github.com/thiagobodruk/biblia) | texto bíblico em português | domínio público |
+| [STEPBible-Data](https://github.com/STEPBible/STEPBible-Data) (TAHOT/TAGNT) | hebraico e grego etiquetados com Strong e morfologia | CC BY 4.0 |
+| [Open Scriptures Strongs](https://github.com/openscriptures/strongs) | definições do léxico de Strong | CC BY-SA |
+
+As licenças exigem crédito — ele aparece no rodapé da tela da Bíblia e no
+painel de palavras no original. Não remova.
+
+> As definições de Strong estão em **inglês** (é o original de 1890/1894);
+> o espanhol de cada palavra vem do STEPBible e ajuda bastante o leitor
+> brasileiro. Uma camada em português pode ser acrescentada depois, sem
+> mexer no resto.
+
 Para regerar o banco (não é necessário no dia a dia):
 
 ```bash
+# texto em português
 curl -L -o .cache/aa.json https://raw.githubusercontent.com/thiagobodruk/biblia/master/json/aa.json
 python3 scripts/gerar-biblia.py .cache/aa.json assets/db/biblia.db
+
+# palavras no original + léxico (baixe antes os .txt do STEPBible e os
+# dicionários do Open Scriptures para .cache/)
+python3 scripts/gerar-originais.py .cache/step .cache assets/db/biblia.db
 ```
 
 ## O que dá para fazer pelo app

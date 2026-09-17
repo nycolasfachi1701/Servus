@@ -35,7 +35,9 @@ export default function IndiceBiblia() {
     <ScrollView contentContainerStyle={{ padding: ESPACO.lg, gap: ESPACO.lg }}>
       <View style={{ gap: 4 }}>
         <Titulo>Bíblia</Titulo>
-        <Mini>Almeida Revisada (1914) · funciona sem internet</Mini>
+        <Mini>
+          Almeida Revisada (1914) · com hebraico, grego e Strong · funciona sem internet
+        </Mini>
       </View>
 
       <Pressable
@@ -143,6 +145,15 @@ export default function IndiceBiblia() {
             </Pressable>
           ))}
         </View>
+      </View>
+
+      <View style={{ gap: 4, paddingTop: ESPACO.md }}>
+        <Mini>
+          Texto: Almeida Revisada Imprensa Bíblica (1914), domínio público.
+        </Mini>
+        <Mini>
+          Hebraico e grego: STEPBible (CC BY 4.0) · Léxico de Strong: Open Scriptures (CC BY-SA).
+        </Mini>
       </View>
 
       <View style={{ height: ESPACO.xl }} />

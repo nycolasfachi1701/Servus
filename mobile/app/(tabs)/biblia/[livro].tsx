@@ -2,7 +2,16 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Alert, Pressable, ScrollView, Share, Text, TextInput, View } from "react-native";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { useSQLiteContext } from "expo-sqlite";
-import { lerCapitulo, obterLivro, referencia, type Livro, type Versiculo } from "@/lib/biblia";
+import {
+  idiomaOriginal,
+  lerCapitulo,
+  obterLivro,
+  palavrasDoVersiculo,
+  referencia,
+  type Livro,
+  type PalavraOriginal,
+  type Versiculo,
+} from "@/lib/biblia";
 import {
   anotacoesDoCapitulo,
   apagarAnotacao,
@@ -35,6 +44,11 @@ export default function LeitorBiblia() {
   const [escrevendo, setEscrevendo] = useState(false);
   const [rascunho, setRascunho] = useState("");
   const [listaCapitulos, setListaCapitulos] = useState(false);
+
+  // palavras no original (hebraico ou grego) do versículo escolhido
+  const [vendoOriginal, setVendoOriginal] = useState(false);
+  const [palavras, setPalavras] = useState<PalavraOriginal[] | null>(null);
+  const [palavraAberta, setPalavraAberta] = useState<number | null>(null);
 
   const rolagem = useRef<ScrollView>(null);
 
@@ -77,11 +91,21 @@ export default function LeitorBiblia() {
     setSelecionado(versiculo);
     setRascunho(anotacoes.get(versiculo.versiculo)?.texto ?? "");
     setEscrevendo(false);
+    setVendoOriginal(false);
+    setPalavras(null);
+    setPalavraAberta(null);
   }
 
   function fechar() {
     setSelecionado(null);
     setEscrevendo(false);
+    setVendoOriginal(false);
+  }
+
+  async function verOriginal() {
+    if (!selecionado) return;
+    setVendoOriginal(true);
+    setPalavras(await palavrasDoVersiculo(db, livroId, capitulo, selecionado.versiculo));
   }
 
   async function marcar(cor: string | null) {
@@ -309,6 +333,96 @@ export default function LeitorBiblia() {
                 <Botao titulo="Salvar" style={{ flex: 1 }} aoTocar={guardarAnotacao} />
               </View>
             </View>
+          ) : vendoOriginal ? (
+            <View style={{ gap: ESPACO.md }}>
+              <Mini>
+                {idiomaOriginal(livroId) === "hebraico" ? "Hebraico" : "Grego"} · toque na palavra
+                para ver a definição
+              </Mini>
+
+              {palavras === null ? (
+                <Carregando />
+              ) : palavras.length === 0 ? (
+                <Mini>Este versículo não tem palavras etiquetadas.</Mini>
+              ) : (
+                <ScrollView style={{ maxHeight: 360 }} contentContainerStyle={{ gap: ESPACO.sm }}>
+                  {palavras.map((palavra) => {
+                    const aberta = palavraAberta === palavra.ordem;
+                    return (
+                      <Pressable
+                        key={palavra.ordem}
+                        onPress={() => setPalavraAberta(aberta ? null : palavra.ordem)}
+                        style={{
+                          gap: 4,
+                          padding: ESPACO.md,
+                          borderRadius: RAIO.md,
+                          backgroundColor: aberta ? cores.primariaTenue : cores.superficie2,
+                        }}
+                      >
+                        <View
+                          style={{
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            gap: ESPACO.sm,
+                          }}
+                        >
+                          <Text
+                            style={{
+                              fontSize: 22,
+                              color: cores.texto,
+                              writingDirection:
+                                idiomaOriginal(livroId) === "hebraico" ? "rtl" : "ltr",
+                            }}
+                          >
+                            {palavra.palavra}
+                          </Text>
+                          {palavra.strongs ? (
+                            <Text style={{ fontSize: 12, fontWeight: "700", color: cores.primaria }}>
+                              {palavra.strongs}
+                            </Text>
+                          ) : null}
+                        </View>
+
+                        <Text style={{ fontSize: 13.5, color: cores.textoSuave }}>
+                          {palavra.translit}
+                          {palavra.espanhol ? ` · ${palavra.espanhol}` : ""}
+                          {palavra.gloss ? ` · ${palavra.gloss}` : ""}
+                        </Text>
+
+                        {aberta && palavra.definicao ? (
+                          <View style={{ gap: 4, paddingTop: 4 }}>
+                            {palavra.forma ? (
+                              <Text style={{ fontSize: 14, color: cores.texto }}>
+                                Forma no dicionário: {palavra.forma}
+                              </Text>
+                            ) : null}
+                            <Text style={{ fontSize: 14, color: cores.texto, lineHeight: 20 }}>
+                              {palavra.definicao}
+                            </Text>
+                            {palavra.derivacao ? (
+                              <Text style={{ fontSize: 13, color: cores.textoSuave }}>
+                                {palavra.derivacao}
+                              </Text>
+                            ) : null}
+                          </View>
+                        ) : null}
+                      </Pressable>
+                    );
+                  })}
+                </ScrollView>
+              )}
+
+              <Mini>
+                Original: STEPBible (CC BY 4.0) · Definições: Strong's / Open Scriptures (CC BY-SA)
+              </Mini>
+              <Botao
+                titulo="Voltar"
+                variante="secundario"
+                aoTocar={() => setVendoOriginal(false)}
+                icone={<Icone nome="arrow-left" tamanho={18} cor={cores.texto} />}
+              />
+            </View>
           ) : (
             <>
               <View style={{ flexDirection: "row", gap: ESPACO.md, justifyContent: "center" }}>
@@ -333,6 +447,12 @@ export default function LeitorBiblia() {
                 titulo={anotacaoSelecionada?.texto ? "Editar anotação" : "Anotar"}
                 aoTocar={() => setEscrevendo(true)}
                 icone={<Icone nome="notebook-pen" tamanho={18} cor={cores.sobrePrimaria} />}
+              />
+              <Botao
+                titulo="Palavras no original"
+                variante="secundario"
+                aoTocar={verOriginal}
+                icone={<Icone nome="book-open" tamanho={18} cor={cores.texto} />}
               />
               <Botao
                 titulo="Compartilhar"

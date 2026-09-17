@@ -92,3 +92,59 @@ export async function buscar(
 export function referencia(livro: string, capitulo: number, versiculo?: number): string {
   return versiculo ? `${livro} ${capitulo}:${versiculo}` : `${livro} ${capitulo}`;
 }
+
+/* ------------------------------------------------- palavras no original */
+
+export type PalavraOriginal = {
+  ordem: number;
+  palavra: string;
+  translit: string | null;
+  strongs: string | null;
+  forma: string | null;
+  gloss: string | null;
+  espanhol: string | null;
+  gramatica: string | null;
+  definicao: string | null;
+  derivacao: string | null;
+};
+
+/** `בְּ/רֵאשִׁ֖ית` → `בְּרֵאשִׁית` (o `/` marca prefixos no dado de origem). */
+function limpar(texto: string | null): string {
+  return (texto ?? "").replace(/\//g, "").replace(/\\׃/g, "").trim();
+}
+
+/**
+ * Palavras hebraicas ou gregas de um versículo, com o verbete de Strong.
+ *
+ * Hebraico vem do TAHOT e grego do TAGNT (STEPBible, CC BY 4.0); as
+ * definições são do Strong's Dictionary (Open Scriptures, CC BY-SA).
+ */
+export async function palavrasDoVersiculo(
+  db: SQLiteDatabase,
+  livro: number,
+  capitulo: number,
+  versiculo: number,
+): Promise<PalavraOriginal[]> {
+  const linhas = await db.getAllAsync<PalavraOriginal>(
+    `select p.ordem, p.palavra, p.translit, p.strongs, p.forma, p.gloss,
+            p.espanhol, p.gramatica, s.definicao, s.derivacao
+       from palavras p
+       left join strongs s on s.codigo = p.strongs
+      where p.livro = ? and p.capitulo = ? and p.versiculo = ?
+      order by p.ordem`,
+    livro,
+    capitulo,
+    versiculo,
+  );
+
+  return linhas.map((linha) => ({
+    ...linha,
+    palavra: limpar(linha.palavra),
+    translit: limpar(linha.translit),
+  }));
+}
+
+/** O Antigo Testamento está em hebraico; o Novo, em grego. */
+export function idiomaOriginal(livro: number): "hebraico" | "grego" {
+  return livro <= 39 ? "hebraico" : "grego";
+}
