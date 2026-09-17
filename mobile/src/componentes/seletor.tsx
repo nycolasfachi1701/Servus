@@ -1,8 +1,9 @@
 import { useMemo, useState, type ReactNode } from "react";
-import { Modal, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import { ESPACO, RAIO, useCores } from "@/lib/tema";
 import { Icone } from "@/componentes/icone";
 import { Mini } from "@/componentes/ui";
+import { FolhaInferior } from "@/componentes/folha";
 
 export type Opcao = {
   valor: string;
@@ -74,18 +75,7 @@ export function Seletor({
         <Icone nome="chevron-right" tamanho={18} cor={cores.textoSuave} />
       </Pressable>
 
-      <Modal visible={aberto} animationType="slide" transparent onRequestClose={() => setAberto(false)}>
-        <Pressable style={{ flex: 1, backgroundColor: "#0008" }} onPress={() => setAberto(false)} />
-        <View
-          style={{
-            maxHeight: "75%",
-            backgroundColor: cores.superficie,
-            borderTopLeftRadius: RAIO.lg,
-            borderTopRightRadius: RAIO.lg,
-            padding: ESPACO.lg,
-            gap: ESPACO.md,
-          }}
-        >
+      <FolhaInferior visivel={aberto} aoFechar={() => setAberto(false)} alturaMaxima="75%">
           <Text style={{ fontSize: 17, fontWeight: "700", color: cores.texto }}>
             {titulo ?? rotulo ?? "Escolher"}
           </Text>
@@ -161,8 +151,7 @@ export function Seletor({
 
             {filtradas.length === 0 ? <Mini>Nada encontrado.</Mini> : null}
           </ScrollView>
-        </View>
-      </Modal>
+      </FolhaInferior>
     </View>
   );
 }
@@ -181,22 +170,11 @@ export function Folha({
 }) {
   const cores = useCores();
   return (
-    <Modal visible={visivel} animationType="slide" transparent onRequestClose={aoFechar}>
-      <Pressable style={{ flex: 1, backgroundColor: "#0008" }} onPress={aoFechar} />
-      <View
-        style={{
-          backgroundColor: cores.superficie,
-          borderTopLeftRadius: RAIO.lg,
-          borderTopRightRadius: RAIO.lg,
-          padding: ESPACO.lg,
-          gap: ESPACO.lg,
-        }}
-      >
-        {titulo ? (
-          <Text style={{ fontSize: 17, fontWeight: "700", color: cores.texto }}>{titulo}</Text>
-        ) : null}
-        {children}
-      </View>
-    </Modal>
+    <FolhaInferior visivel={visivel} aoFechar={aoFechar}>
+      {titulo ? (
+        <Text style={{ fontSize: 17, fontWeight: "700", color: cores.texto }}>{titulo}</Text>
+      ) : null}
+      {children}
+    </FolhaInferior>
   );
 }

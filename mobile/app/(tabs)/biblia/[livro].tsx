@@ -1,14 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import {
-  Alert,
-  Modal,
-  Pressable,
-  ScrollView,
-  Share,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { Alert, Pressable, ScrollView, Share, Text, TextInput, View } from "react-native";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { useSQLiteContext } from "expo-sqlite";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -22,6 +13,7 @@ import {
 } from "@/lib/anotacoes";
 import { ESPACO, RAIO, useCores } from "@/lib/tema";
 import { Botao, Carregando, Corpo, Mini, Separador } from "@/componentes/ui";
+import { FolhaInferior } from "@/componentes/folha";
 import { Icone } from "@/componentes/icone";
 import { CHAVE_ULTIMA_LEITURA } from "./index";
 
@@ -240,21 +232,11 @@ export default function LeitorBiblia() {
       </ScrollView>
 
       {/* ------------------------------------------ escolher capítulo */}
-      <Modal visible={listaCapitulos} animationType="slide" transparent onRequestClose={() => setListaCapitulos(false)}>
-        <Pressable
-          style={{ flex: 1, backgroundColor: "#0008" }}
-          onPress={() => setListaCapitulos(false)}
-        />
-        <View
-          style={{
-            maxHeight: "70%",
-            backgroundColor: cores.superficie,
-            borderTopLeftRadius: RAIO.lg,
-            borderTopRightRadius: RAIO.lg,
-            padding: ESPACO.lg,
-            gap: ESPACO.md,
-          }}
-        >
+      <FolhaInferior
+        visivel={listaCapitulos}
+        aoFechar={() => setListaCapitulos(false)}
+        alturaMaxima="70%"
+      >
           <Text style={{ fontSize: 17, fontWeight: "700", color: cores.texto }}>
             {livro?.nome} — capítulos
           </Text>
@@ -283,26 +265,15 @@ export default function LeitorBiblia() {
               </Pressable>
             ))}
           </ScrollView>
-        </View>
-      </Modal>
+      </FolhaInferior>
 
       {/* --------------------------------------- ações do versículo */}
-      <Modal visible={Boolean(selecionado)} animationType="slide" transparent onRequestClose={fechar}>
-        <Pressable style={{ flex: 1, backgroundColor: "#0008" }} onPress={fechar} />
-        <View
-          style={{
-            backgroundColor: cores.superficie,
-            borderTopLeftRadius: RAIO.lg,
-            borderTopRightRadius: RAIO.lg,
-            padding: ESPACO.lg,
-            gap: ESPACO.lg,
-          }}
-        >
+      <FolhaInferior visivel={Boolean(selecionado)} aoFechar={fechar}>
           <View style={{ gap: 4 }}>
             <Mini>
               {livro?.nome} {capitulo}:{selecionado?.versiculo}
             </Mini>
-            <Corpo numeroDeLinhas={escrevendo ? 2 : 5}>{selecionado?.texto}</Corpo>
+            <Corpo numeroDeLinhas={escrevendo ? 1 : 5}>{selecionado?.texto}</Corpo>
           </View>
 
           {escrevendo ? (
@@ -315,7 +286,7 @@ export default function LeitorBiblia() {
                 multiline
                 autoFocus
                 style={{
-                  minHeight: 120,
+                  minHeight: 96,
                   borderRadius: RAIO.md,
                   borderWidth: 1,
                   borderColor: cores.borda,
@@ -377,8 +348,7 @@ export default function LeitorBiblia() {
               ) : null}
             </>
           )}
-        </View>
-      </Modal>
+      </FolhaInferior>
     </View>
   );
 }
